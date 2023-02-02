@@ -1,0 +1,50 @@
+---
+export interface Props {
+	post: any;
+	titleClass?: string;
+}
+
+const { post } = Astro.props;
+
+let titleClass = Astro.props.titleClass || 'text-3xl font-bold text-black';
+---
+
+<article class="post-preview">
+	<header>
+		<p class="publish-date">{post.frontmatter.publishDate}</p>
+		<a href={post.url}><h1 class={titleClass}>{post.frontmatter.title}</h1></a>
+	</header>
+</article>
+
+<style>
+	.content :global(main > * + *) {
+		margin-top: 1rem;
+	}
+
+	.post-preview {
+		padding-bottom: .25rem;
+		margin-bottom: .25rem;
+	}
+
+	header {
+		align-items: flex-start;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding-bottom: 2rem;
+		text-align: left;
+	}
+
+	.title,
+	.author,
+	.publish-date {
+		margin: 0;
+	}
+
+	.publish-date,
+
+	.title {
+		font-size: 1.75rem;
+		font-weight: 700;
+	}
+</style>
